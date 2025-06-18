@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> ExpenseVault </title>
+    <link rel="icon" type="image/png" href="icon3.png">
+    <link rel="stylesheet" href="loginsignup.css">
+</head>
+
+<body>
+    <header class = "header">
+        <h1>ExpenseVault</h1>
+    </header>
+
+    <div class="backGround">
+        <div class="form-box">
+            
+            <div class="button-box">
+                <div id="btn"></div>
+                <button type="button" class="toggle-btn" onclick="login()">LogIn</button>
+                <button type="button" class="toggle-btn" onclick="signup()">SignUp</button>
+            </div>
+            
+            <form id="login" class="input-group">
+                <input type="text" class="input-field" placeholder="Enter your Username" required>
+                <input type="password" class="input-field" placeholder="Enter your Password" required>
+                <input type="checkbox" class="check-box"><span>Remember Password</span>
+                <button type="submit" class = "submit-btn">LogIn</button>
+            </form>
+
+            <form id="signup" class="input-group">
+                <input type="text" class="input-field" placeholder="Enter your Username" required>
+                <input type="email" class="input-field" placeholder="Enter your email" required>
+                <input type="password" class="input-field" placeholder="Enter Password" required>
+                <input type="checkbox" class="check-box"><span>I agree to the terms and condition</span>
+                <button type="submit" class = "submit-btn">SignUp</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 ExpenseVault. All rights reserved.</p>
+    </footer>
+
+    <script>
+        var x = document.getElementById("login");
+        var y = document.getElementById("signup");
+        var z = document.getElementById("btn");
+
+
+        function signup(){
+            x.style.left = "-400px";
+            y.style.left = "50px";
+            z.style.left = "110px";
+        }
+
+        function login(){
+            x.style.left = "50px";
+            y.style.left = "450px";
+            z.style.left = "0px";
+        }
+           
+    </script>
+</body>
+</html>
