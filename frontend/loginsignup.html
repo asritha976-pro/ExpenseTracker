@@ -26,18 +26,28 @@
             </div>
 
             <form id="login" class="input-group">
-                <input type="text" class="input-field" placeholder="Enter your Username" required>
-                <input type="password" class="input-field" placeholder="Enter your Password" required>
+                <input type="text" class="input-field" placeholder="User_Id" required>
+
+                <div class="password-container">
+                    <input type="password" id="loginPassword" class="input-field" placeholder="Password" required>
+                    <img src="eye.png" alt="Toggle" class="eye-icon" onclick="togglePassword('loginPassword', this)">
+                </div>
+
                 <input type="checkbox" class="check-box"><span>Remember Password</span>
-                <button type="submit" class = "submit-btn">LogIn</button>
+                <button type="submit" class="submit-btn">LogIn</button>
             </form>
 
             <form id="signup" class="input-group">
-                <input type="text" class="input-field" placeholder="Enter your Username" required>
-                <input type="email" class="input-field" placeholder="Enter your email" required>
-                <input type="password" class="input-field" placeholder="Enter Password" required>
+                <input type="text" class="input-field" placeholder="User_Id" required>
+                <input type="email" class="input-field" placeholder="Email" required>
+
+                <div class="password-container">
+                    <input type="password" id="signupPassword" class="input-field" placeholder="Password" required>
+                    <img src="eye.png" alt="Toggle" class="eye-icon" onclick="togglePassword('signupPassword', this)">
+                </div>
+
                 <input type="checkbox" class="check-box"><span>I agree to the terms and condition</span>
-                <button type="submit" class = "submit-btn">SignUp</button>
+                <button type="submit" class="submit-btn">SignIn</button>
             </form>
         </div>
     </div>
@@ -62,6 +72,17 @@
             x.style.left = "50px";
             y.style.left = "450px";
             z.style.left = "0px";
+        }
+
+        function togglePassword(id, icon) {
+            const input = document.getElementById(id);
+            if (input.type === "password") {
+                input.type = "text";
+                icon.src = "eye-off.png";
+            } else {
+                input.type = "password";
+                icon.src = "eye.png";
+            }
         }
            
     </script>
