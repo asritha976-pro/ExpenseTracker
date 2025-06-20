@@ -8,6 +8,8 @@ const expenseRouter = require('./routes/expenses');
 const authRouter = require('./routes/auth');
 const userRouter = require('./routes/users');
 const {authenticate} = require('./middlewares/authMiddleware');
+const {requiredRole} = require('./middlewares/verifyRoleMiddleware');
+
 const app = express();
 
 app.use(express.json());
@@ -15,7 +17,7 @@ app.use(express.json());
 // Routes
 app.use('/auth',authRouter);
 app.use('/expenses',authenticate, expenseRouter);
-app.use('/users',authenticate,userRouter);
+app.use('/users',authenticate,requiredRole(['admin']),userRouter);
 
 //Connect to database
 
