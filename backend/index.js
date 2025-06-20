@@ -17,7 +17,7 @@ app.use(express.json());
 // Routes
 app.use('/auth',authRouter);
 app.use('/expenses',authenticate, expenseRouter);
-app.use('/users',authenticate,requiredRole(['admin']),userRouter);
+app.use('/users',authenticate,userRouter);
 
 //Connect to database
 
