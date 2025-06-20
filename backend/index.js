@@ -6,7 +6,7 @@ const mongoConnection = require('./config/mongodb');
 
 const expenseRouter = require('./routes/expenses');
 const authRouter = require('./routes/auth');
-
+const userRouter = require('./routes/users')
 const app = express();
 
 app.use(express.json());
@@ -14,6 +14,7 @@ app.use(express.json());
 // Routes
 app.use('/auth',authRouter);
 app.use('/expenses', expenseRouter);
+app.use('/users', expenseRouter);
 
 //Connect to database
 

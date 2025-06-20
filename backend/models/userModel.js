@@ -16,12 +16,12 @@ const userSchema = new mongoose.Schema({
     createAt:{
         type: Date,
         default: new Date(),
+    },
+    role: {
+        type: String,
+        enum:['user','admin'],
+        default :'user'
     }
-    // role: {
-    //     type: String,
-    //     enum:['user','admin'],
-    //     default :'user'
-    // }
 })
 
 const User = mongoose.model("user",userSchema);
