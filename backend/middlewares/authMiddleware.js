@@ -11,7 +11,7 @@ exports.authenticate = async(req,res,next) =>{
                 return res.status(401).send({error:'Session expired or invalid. Please Login again'});
             }
             req.user = null;
-            req.user = decoded.id;
+            req.user = decoded;
             req.role = decoded.role;
             next();
         })
