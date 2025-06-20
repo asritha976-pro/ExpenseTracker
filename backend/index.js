@@ -6,15 +6,16 @@ const mongoConnection = require('./config/mongodb');
 
 const expenseRouter = require('./routes/expenses');
 const authRouter = require('./routes/auth');
-const userRouter = require('./routes/users')
+const userRouter = require('./routes/users');
+const {authenticate} = require('./middlewares/authMiddleware');
 const app = express();
 
 app.use(express.json());
 
 // Routes
 app.use('/auth',authRouter);
-app.use('/expenses', expenseRouter);
-app.use('/users', expenseRouter);
+app.use('/expenses',authenticate, expenseRouter);
+app.use('/users',authenticate,userRouter);
 
 //Connect to database
 
