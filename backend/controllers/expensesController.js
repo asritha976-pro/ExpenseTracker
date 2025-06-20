@@ -4,8 +4,8 @@ exports.getAllExpenses = async(req,res) => {
         const expenses = await Expenses.find();
         return res.status(200).send({expenses:expenses})
     }catch(error){
-        console.error(`Error fetching all expense`,error.message)
-        return res.status(500).send({error:`Error fetching all Expenses`})
+        console.error(`Error retrieving expenses:`,error.message)
+        return res.status(500).send({error:`An error occured while fetching expense. Please try again later`})
     }
 }
 
@@ -14,11 +14,11 @@ exports.getExpenseById = async(req,res) => {
     try{
         const expense = await Expenses.findById(id);
         if(!expense){
-            return res.status(404).send({error:'Expense not found'})
+            return res.status(404).send({error:'No Expense found'})
         }
         return res.status(200).send({expense:expense})
     }catch(error){
-         console.error('Error fetching todo:',error.message)
+         console.error('Error fetching expenses:',error.message)
         return res.status(500).send({error:'Error fetching expense'})
 
     }
@@ -41,12 +41,12 @@ exports.updateExpense = async(req,res) => {
     try{
         const updatedExpenses = await Expenses.findByIdAndUpdate(id,req.body,{new:true})
         if(!updatedExpenses){
-            return res.status(404).send({error:'Expense not found'})
+            return res.status(404).send({error:'Expense not found. Update failed'})
         }
         return res.status(200).send({updatedExpenses:updatedExpenses})
     }catch(error){
         console.error('Error updating expense',error.message)
-        return res.status(400).send({error:'Error updating expense '})
+        return res.status(400).send({error:'Unable to update your expense. please check your inpit '})
 
     }
 }
@@ -56,7 +56,7 @@ exports.deleteExpense = async(req,res) => {
     try{
         const deleteExpense = await Expenses.findByIdAndDelete(id,{new:true})
         if(!deleteExpense){
-            return res.status(404).send({error:'Expense not found'})
+            return res.status(404).send({error:'Expense not found. Delete failed'})
         }
         return res.status(200).send({deleteExpense:deleteExpense})
     }catch(error){
