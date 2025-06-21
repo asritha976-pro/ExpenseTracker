@@ -4,6 +4,6 @@ const {authenticate} = require('../middlewares/authMiddleware');
 const {requiredRole} = require('../middlewares/verifyRoleMiddleware');
 
 userRouter.get('/',authenticate,requiredRole(['admin']),userController.getAllUsers);
-userRouter.patch('/balance',userController.setInitialBalance);
+userRouter.patch('/balance',userController.modifyInitialBalance);
 
 module.exports = userRouter;

@@ -17,6 +17,10 @@ const expenseSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    paymentType:{
+        type: String,
+        defualt: "UPI"
+    },
     date:{
         type: Date,
         required: true,

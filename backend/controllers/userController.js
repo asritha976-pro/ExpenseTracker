@@ -10,7 +10,7 @@ exports.getAllUsers = async(req,res) => {
     }
 }
 
-exports.setInitialBalance = async(req,res) => {
+exports.modifyInitialBalance = async(req,res) => {
     try{
         const userId = req.user.id;
         const {balance} = req.body;
@@ -21,7 +21,7 @@ exports.setInitialBalance = async(req,res) => {
             {new : true}
         );
 
-        return res.status(200).send({message:"Your Initial balance", balance: updatedUser.balance});
+        return res.status(200).send({message:"Your modified Initial balance", balance: updatedUser.balance});
     }catch(error){
         return res.status(400).send({error: "Error initialising balance"});
     }

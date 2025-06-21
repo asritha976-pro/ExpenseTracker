@@ -17,6 +17,7 @@ exports.signup = async(req,res) => {
             username: newUser.username,
             email: newUser.email,
             password: hashedPassword,
+            balance: newUser.balance
         })
         user.save()
         return res.status(201).send({message:'Your account has been successfully created. Welcome!'})
