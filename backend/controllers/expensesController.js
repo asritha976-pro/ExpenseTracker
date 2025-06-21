@@ -3,7 +3,7 @@ const User = require('../models/userModel')
 exports.getAllExpenses = async(req,res) => {
     const userId = req.user.id;
     try{
-        const expenses = await Expenses.find({user:userId});
+        const expenses = await Expenses.find({user:userId}).sort({date : -1});
         return res.status(200).send({expenses:expenses})
     }catch(error){
         console.error(`Error retrieving expenses:`,error.message)
