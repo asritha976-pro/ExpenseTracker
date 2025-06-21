@@ -1,4 +1,5 @@
 const Expenses = require('../models/expensesModels');
+const User = require('../models/userModel')
 exports.getAllExpenses = async(req,res) => {
     const userId = req.user.id;
     try{
@@ -28,10 +29,21 @@ exports.getExpenseById = async(req,res) => {
 exports.createExpense = async(req,res) => {
      const {item,amount,category,date} = req.body;
      const userId = req.user.id;
+     console.log("Creating expense for user:", userId);
+     const user = await User.findById(userId);
+     if(!user){
+        return res.status(404).send({error:'User not found!'});
+     }
+     if(user.balance < amount){
+        return res.status(400).send({error:"Not sufficient balance"});
+     }
+
+     user.balance -= amount;
+     await user.save();
     try{
         const newExpense = new Expenses({item, amount, category, date,user:userId})
         const savedExpense = await newExpense.save()
-        return res.status(201).send({newExpense:savedExpense})
+        return res.status(201).send({newExpense:savedExpense, message : "Expense added and balance updated",expense : savedExpense, remainingBalance: user.balance})
     }catch(error){
         console.log('Error creating expense:',error.message)
         return res.status(400).send({error:'Error creating expense'})
