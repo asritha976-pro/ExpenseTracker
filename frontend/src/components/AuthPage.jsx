@@ -154,7 +154,7 @@ function AuthPage() {
               </div>
               <input type="checkbox" className="check-box" />
               <span>I agree to the terms and condition</span>
-              <button type="submit" className="submit-btn">SignIn</button>
+              <button type="submit" className="submit-btn">Signup</button>
             </form>
           )}
         </div>
