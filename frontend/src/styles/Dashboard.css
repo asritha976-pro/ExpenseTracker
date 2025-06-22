@@ -1,9 +1,23 @@
 .balance-card {
   background-color: #e0ffe0;
   border: 2px solid green;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  margin: 1rem 0;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  margin: 1.5rem 0;
   text-align: center;
-  max-width: 300px;
+  max-width: 450px;
+  
 }
+
+.dashboard-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: flex-start;
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+  min-height: 100vh;
+  text-align: center;
+  gap: 1.5rem
+}
+
