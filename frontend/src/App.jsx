@@ -5,6 +5,8 @@ import AddExpense from './views/AddExpense';
 import Expenses from './views/Expenses';
 import Profile from './views/Profile';
 import NotFound from './views/NotFound';
+import SetBalance from './views/SetBalance';
+
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
         <Route path="/expenses" element={<Expenses />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/set-balance" element={<SetBalance />} />
       </Routes>
     </Router>
   );

@@ -1,0 +1,53 @@
+.add-expense-form-container {
+  padding: 2rem;
+  max-width: 500px;
+  margin: 3rem auto;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-expense-form-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.add-expense-form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.add-expense-form-container input,
+.add-expense-form-container select {
+  padding: 0.7rem;
+  font-size: 1rem;
+}
+
+.add-expense-form-container button {
+  padding: 0.8rem;
+  background-color: teal;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.radio-options {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.radio-options label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}

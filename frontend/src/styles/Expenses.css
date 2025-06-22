@@ -1,0 +1,38 @@
+.expenses-container {
+  padding: 2rem;
+  max-width: 700px;
+  margin: 2rem auto;
+  background-color: #fafafa;
+  border-radius: 8px;
+}
+
+.sort-buttons {
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.sort-buttons button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.expenses-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.expense-card {
+  padding: 1rem;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+}

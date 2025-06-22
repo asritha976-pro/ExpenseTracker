@@ -1,0 +1,26 @@
+.setbalance-container {
+  padding: 2rem;
+  max-width: 400px;
+  margin: 5rem auto;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.setbalance-container input {
+  padding: 0.7rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.setbalance-container button {
+  padding: 0.7rem 1.5rem;
+  background-color: teal;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
