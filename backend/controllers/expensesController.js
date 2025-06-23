@@ -27,7 +27,7 @@ exports.getExpenseById = async(req,res) => {
 }
 
 exports.createExpense = async(req,res) => {
-     const {item,amount,category,date} = req.body;
+     const {title,amount,category,date} = req.body;
      const userId = req.user.id;
      console.log("Creating expense for user:", userId);
      const user = await User.findById(userId);
@@ -41,7 +41,7 @@ exports.createExpense = async(req,res) => {
      user.balance -= amount;
      await user.save();
     try{
-        const newExpense = new Expenses({item, amount, category, date,user:userId})
+        const newExpense = new Expenses({title, amount, category, date,user:userId})
         const savedExpense = await newExpense.save()
         return res.status(201).send({newExpense:savedExpense, message : "Expense added and balance updated",expense : savedExpense, remainingBalance: user.balance})
     }catch(error){

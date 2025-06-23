@@ -5,7 +5,7 @@ const expenseSchema = new mongoose.Schema({
     //     type: Number,
     //     required: true,
     // },
-    item:{
+    title:{
         type: String,
         required: true,
     },
@@ -19,7 +19,7 @@ const expenseSchema = new mongoose.Schema({
     },
     paymentType:{
         type: String,
-        defualt: "UPI",
+        default: "UPI",
     },
     date:{
         type: Date,
