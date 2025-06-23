@@ -1,15 +1,36 @@
 import { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import '../styles/Dashboard.css';
+import axios from 'axios';
 
 function Dashboard() {
   const [balance, setBalance] = useState(0);
 
+  // useEffect(() => {
+  //   const storedBalance = parseFloat(localStorage.getItem('balance')) || 0;
+  //   setBalance(storedBalance);
+  // }, []);
+  
+  // From here to
   useEffect(() => {
-    const storedBalance = parseFloat(localStorage.getItem('balance')) || 0;
-    setBalance(storedBalance);
-  }, []);
+        axios.get('/users/balance',{
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
+        })
+        .then(res => {
+            // console.log(res.data)
+            if(res?.data?.balance !== undefined){
+                setBalance(res.data.balance);
+            }
+            
+        })
+        .catch(error =>{
+            console.error('Failed to load balance : ',error.message)
+        })
+    },[]);
 
+    // here
   return (
     <>
       <Navbar />

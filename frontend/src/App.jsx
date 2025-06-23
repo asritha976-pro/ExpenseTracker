@@ -7,8 +7,12 @@ import Profile from './views/Profile';
 import NotFound from './views/NotFound';
 import SetBalance from './views/SetBalance';
 
+import axios from 'axios';
+
 
 function App() {
+  axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+  
   return (
     <Router>
       <Routes>

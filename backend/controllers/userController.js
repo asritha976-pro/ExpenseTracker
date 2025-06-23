@@ -26,3 +26,17 @@ exports.modifyInitialBalance = async(req,res) => {
         return res.status(400).send({error: "Error initialising balance"});
     }
 }
+
+exports.getBalance = async(req,res) => {
+    try{
+        const userId = req.user.id;
+        const user = await User.findById(userId);
+        if(!user){
+            return res.status(404).send({error:'User not found'})
+        }
+        return res.status(200).send({balance:user.balance});
+    }catch(error){
+        console.error('Error fetching balance',error.message);
+        return res.status(500).send({error: 'Failed to fetch balance'})
+    }
+};

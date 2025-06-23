@@ -1,15 +1,33 @@
 import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import '../styles/Expenses.css';
+import axios from 'axios';
 
 function Expenses() {
   const [expenses, setExpenses] = useState([]);
   const [sortType, setSortType] = useState('latest'); // latest, oldest, high, low
 
+  // useEffect(() => {
+  //   const storedExpenses = JSON.parse(localStorage.getItem('expenses')) || [];
+  //   setExpenses(storedExpenses);
+  // }, []);
+// from here to 
   useEffect(() => {
-    const storedExpenses = JSON.parse(localStorage.getItem('expenses')) || [];
-    setExpenses(storedExpenses);
-  }, []);
+    axios.get('/expenses', {
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+    .then(res => {
+      if(res?.data?.expenses){
+        setExpenses(res.data.expenses);
+      }
+    })
+    .catch(err => {
+      console.error('Failed to fetch expenses',error.message)
+    });
+  },[]);
+// here
 
   const sortExpenses = (type) => {
     let sorted = [...expenses];
