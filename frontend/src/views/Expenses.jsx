@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
+import ExpenseList from "./DeleteExpenses";
 import '../styles/Expenses.css';
 
 function Expenses() {
   const [expenses, setExpenses] = useState([]);
-  const [sortType, setSortType] = useState('latest'); // latest, oldest, high, low
+  const [sortType, setSortType] = useState('latest');
 
   useEffect(() => {
     const storedExpenses = JSON.parse(localStorage.getItem('expenses')) || [];
@@ -19,7 +20,7 @@ function Expenses() {
     } else if (type === 'low') {
       sorted.sort((a, b) => a.amount - b.amount);
     } else if (type === 'latest') {
-      sorted.sort((a, b) => b.id - a.id); // latest first
+      sorted.sort((a, b) => b.id - a.id);
     } else if (type === 'oldest') {
       sorted.sort((a, b) => a.id - b.id);
     }
@@ -41,18 +42,7 @@ function Expenses() {
           <button onClick={() => sortExpenses('oldest')}>Date: Oldest First</button>
         </div>
 
-        {expenses.length === 0 ? (
-          <p>No expenses found.</p>
-        ) : (
-          <ul className="expenses-list">
-            {expenses.map((exp) => (
-              <li key={exp.id} className="expense-card">
-                <div><strong>₹{exp.amount}</strong> — {exp.title}</div>
-                <div>{exp.category} | {exp.date}</div>
-              </li>
-            ))}
-          </ul>
-        )}
+        <ExpenseList initialExpenses={expenses} onExpensesChange={setExpenses} />
       </div>
     </>
   );
