@@ -17,7 +17,7 @@ function AuthPage() {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/login', loginData);
+      const response = await axios.post('/auth/login', loginData);
       localStorage.setItem('token', response.data.accessToken);
       alert('Login successful!');
       navigate('/dashboard');
@@ -29,7 +29,7 @@ function AuthPage() {
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/signup', signupData);
+      await axios.post('/auth/signup', signupData);
       alert('Signup successful! Please log in.');
       setIsLogin(true);
     } catch (error) {
