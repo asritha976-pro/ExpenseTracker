@@ -36,7 +36,7 @@
 
 .nav-links {
   display: flex;
-  gap: 32px; /* ← adds space between links */
+  gap: 32px;
   flex-wrap: wrap;
 }
 

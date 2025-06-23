@@ -1,82 +1,41 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Auth.css';
-
 import axios from 'axios';
-
 
 function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
-  const [showPassword, setShowPassword] = useState({
-    login: false,
-    signup: false,
-  });
-
-  // Add here
-  const[loginData, setLoginData] =useState({email: '',password: ''})
-
-  //
+  const [showPassword, setShowPassword] = useState({ login: false, signup: false });
+  const [loginData, setLoginData] = useState({ email: '', password: '' });
+  const [signupData, setSignupData] = useState({ username: '', email: '', password: '', balance: 5000 });
   const navigate = useNavigate();
 
   const togglePassword = (form) => {
-    setShowPassword((prev) => ({
-      ...prev,
-      [form]: !prev[form],
-    }));
+    setShowPassword((prev) => ({ ...prev, [form]: !prev[form] }));
   };
 
   const handleLoginSubmit = async (e) => {
-  e.preventDefault();
-
-  const loginData = {
-    userId: 'demoUser',
-    password: 'demoPass',
-  };
-
-  try {
-    const response = await fetch('http://localhost:5000/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(loginData),
-    });
-
-    const result = await response.json();
-
-    if (response.ok) {
-      // Save auth token or user info
-      localStorage.setItem('token', result.token);
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:5000/login', loginData);
+      localStorage.setItem('token', response.data.accessToken);
+      alert('Login successful!');
       navigate('/dashboard');
-    } else {
-      alert(result.message || 'Login failed');
+    } catch (error) {
+      alert(error.response?.data?.error || 'Login failed');
     }
-  } catch (error) {
-    alert('Server error');
-  }
-};
-
+  };
 
   const handleSignupSubmit = async (e) => {
-  e.preventDefault();
-
-  const userData = {
-    userId: 'demoUser',
-    email: 'demo@example.com',
-    password: 'demoPass'
+    e.preventDefault();
+    try {
+      await axios.post('http://localhost:5000/signup', signupData);
+      alert('Signup successful! Please log in.');
+      setIsLogin(true);
+    } catch (error) {
+      alert(error.response?.data?.error || 'Signup failed');
+    }
   };
-
-  const response = await fetch('http://localhost:5000/signup', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(userData)
-  });
-
-  if (response.ok) {
-    navigate('/dashboard');
-  } else {
-    alert('Signup failed');
-  }
-};
-
 
   return (
     <>
@@ -98,16 +57,14 @@ function AuthPage() {
           </div>
 
           {isLogin ? (
-            <form
-              className="input-group"
-              style={{ left: '50px' }}
-              onSubmit={handleLoginSubmit}
-            >
+            <form className="input-group" onSubmit={handleLoginSubmit}>
               <input
-                type="text"
+                type="email"
                 className="input-field"
-                placeholder="User_Id"
+                placeholder="Email"
                 required
+                value={loginData.email}
+                onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
               />
               <div className="password-container">
                 <input
@@ -115,6 +72,8 @@ function AuthPage() {
                   className="input-field"
                   placeholder="Password"
                   required
+                  value={loginData.password}
+                  onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
                 />
                 <img
                   src={showPassword.login ? '/eye-off.png' : '/eye.png'}
@@ -128,22 +87,22 @@ function AuthPage() {
               <button type="submit" className="submit-btn">LogIn</button>
             </form>
           ) : (
-            <form
-              className="input-group"
-              style={{ left: '50px' }}
-              onSubmit={handleSignupSubmit}
-            >
+            <form className="input-group" onSubmit={handleSignupSubmit}>
               <input
                 type="text"
                 className="input-field"
                 placeholder="User_Id"
                 required
+                value={signupData.username}
+                onChange={(e) => setSignupData({ ...signupData, username: e.target.value })}
               />
               <input
                 type="email"
                 className="input-field"
                 placeholder="Email"
                 required
+                value={signupData.email}
+                onChange={(e) => setSignupData({ ...signupData, email: e.target.value })}
               />
               <div className="password-container">
                 <input
@@ -151,6 +110,8 @@ function AuthPage() {
                   className="input-field"
                   placeholder="Password"
                   required
+                  value={signupData.password}
+                  onChange={(e) => setSignupData({ ...signupData, password: e.target.value })}
                 />
                 <img
                   src={showPassword.signup ? '/eye-off.png' : '/eye.png'}
@@ -160,7 +121,7 @@ function AuthPage() {
                 />
               </div>
               <input type="checkbox" className="check-box" />
-              <span>I agree to the terms and condition</span>
+              <span>I agree to the terms and conditions</span>
               <button type="submit" className="submit-btn">Signup</button>
             </form>
           )}
