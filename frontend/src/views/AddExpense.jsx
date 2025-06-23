@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import '../styles/AddExpense.css';
+import axios from 'axios';
 
 function AddExpense() {
   const navigate = useNavigate();
@@ -18,15 +19,32 @@ function AddExpense() {
     setExpense({ ...expense, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     const amount = parseFloat(expense.amount);
-    const currentBalance = parseFloat(localStorage.getItem('balance')) || 0;
+    try {
+    const response = await axios.post('/expenses',{title: expense.title,amount,category: expense.category,date: expense.date,paymentType: expense.paymentType},
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      }
+    );
 
-    if (amount > currentBalance) {
-      alert("Insufficient balance!");
-      return;
+    alert("Expense added!");
+    navigate('/dashboard');
+  } catch (error) {
+    if (error.response?.data?.error) {
+      alert(error.response.data.error);
+    } else {
+      alert('Failed to add expense');
+    }  
+    // const currentBalance = parseFloat(localStorage.getItem('balance')) || 0;
+
+    // if (amount > currentBalance) {
+    //   alert("Insufficient balance!");
+    //   return;
     }
 
     const newExpense = {
