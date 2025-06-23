@@ -14,6 +14,10 @@ const app = express();
 
 app.use(express.json());
 
+const cors = require('cors');
+app.use(cors());
+
+
 // Routes
 app.use('/auth',authRouter);
 app.use('/expenses',authenticate, expenseRouter);

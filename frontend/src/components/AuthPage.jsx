@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Auth.css';
 
+import axios from 'axios';
+
+
 function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState({
@@ -9,6 +12,10 @@ function AuthPage() {
     signup: false,
   });
 
+  // Add here
+  const[loginData, setLoginData] =useState({email: '',password: ''})
+
+  //
   const navigate = useNavigate();
 
   const togglePassword = (form) => {

@@ -35,10 +35,11 @@ function AddExpense() {
     alert("Expense added!");
     navigate('/dashboard');
   } catch (error) {
+    console.error('Error:', error.response?.data || error.message)
     if (error.response?.data?.error) {
       alert(error.response.data.error);
     } else {
-      alert('Failed to add expense');
+      alert(error.message || 'Failed to add expense');
     }  
     // const currentBalance = parseFloat(localStorage.getItem('balance')) || 0;
 
