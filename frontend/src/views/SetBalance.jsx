@@ -1,21 +1,32 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import '../styles/SetBalance.css';
 
 function SetBalance() {
   const [balance, setBalance] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!balance || Number(balance) <= 0) {
       alert("Please enter a valid amount");
       return;
     }
 
-    localStorage.setItem('balance', balance);
-    localStorage.setItem('expenses', JSON.stringify([])); // initialize empty expense list
-    navigate('/dashboard');
+    try{
+      const token = localStorage.getItem('token');
+
+      const response = await axios.put('/users/set-balance',{balance:Number(balance)},{headers:{Authorization:`Bearer ${token}`}})
+      
+      localStorage.setItem('balance', response.data.balance);
+      localStorage.setItem('expenses', JSON.stringify([])); // initialize empty expense list
+      navigate('/dashboard');
+    }catch(error){
+      alert(error.response?.data?.error || 'Failed to update balance');
+    }
+     
+   
   };
 
   return (
