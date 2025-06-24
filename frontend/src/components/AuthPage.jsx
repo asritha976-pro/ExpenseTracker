@@ -30,6 +30,7 @@ function AuthPage() {
     e.preventDefault();
     try {
       const response = await axios.post('/auth/signup',signupData);
+      console.log('Signup response:',response);
       localStorage.setItem('token',response.data.accessToken);
       navigate('/set-balance');
 
