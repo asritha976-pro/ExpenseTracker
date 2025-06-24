@@ -7,7 +7,7 @@ function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState({ login: false, signup: false });
   const [loginData, setLoginData] = useState({ email: '', password: '' });
-  const [signupData, setSignupData] = useState({ username: '', email: '', password: '', balance: 5000 });
+  const [signupData, setSignupData] = useState({ username: '', email: '', password: ''});
   const navigate = useNavigate();
 
   const togglePassword = (form) => {
@@ -19,7 +19,7 @@ function AuthPage() {
     try {
       const response = await axios.post('/auth/login', loginData);
       localStorage.setItem('token', response.data.accessToken);
-      alert('Login successful!');
+      //alert('Login successful!');
       navigate('/dashboard');
     } catch (error) {
       alert(error.response?.data?.error || 'Login failed');
@@ -29,9 +29,13 @@ function AuthPage() {
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/auth/signup', signupData);
-      alert('Signup successful! Please log in.');
-      setIsLogin(true);
+      const response = await axios.post('/auth/signup',signupData);
+      localStorage.setItem('token',response.data.accessToken);
+      navigate('/set-balance');
+
+      // await axios.post('/auth/signup', signupData);
+      // alert('Signup successful! Please log in.');
+      // setIsLogin(true);
     } catch (error) {
       alert(error.response?.data?.error || 'Signup failed');
     }

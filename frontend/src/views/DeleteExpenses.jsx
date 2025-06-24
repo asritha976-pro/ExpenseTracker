@@ -15,7 +15,7 @@ function ExpenseList({ initialExpenses, onExpensesChange }) {
     const updatedExpenses = initialExpenses.filter(exp => exp._id !== id);
     if(onExpensesChange) onExpensesChange(updatedExpenses);
 
-    alert("Expense deleted successfully");
+    //alert("Expense deleted successfully");
   }catch(error){
     console.error("Failed to delete expense:",error.message);
     alert(error.response?.data?.error || "Failed to delete expense. Please try again");

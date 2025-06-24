@@ -32,7 +32,7 @@ function AddExpense() {
       }
     );
 
-    alert("Expense added!");
+    //alert("Expense added!");
     navigate('/dashboard');
   } catch (error) {
     console.error('Error:', error.response?.data || error.message)
