@@ -87,8 +87,11 @@ function AuthPage() {
                   onClick={() => togglePassword('login')}
                 />
               </div>
-              <input type="checkbox" className="check-box" />
-              <span>Remember Password</span>
+              <div className="checkbox-row">
+                  <input type="checkbox" className="check-box" />
+                  <span>{isLogin ? 'Remember Password' : 'I agree to the terms and conditions'}</span>
+              </div>
+
               <button type="submit" className="submit-btn">LogIn</button>
             </form>
           ) : (

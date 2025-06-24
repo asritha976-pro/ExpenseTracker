@@ -30,22 +30,24 @@ function Expenses() {
   },[]);
 // here
 
+  // 
   const sortExpenses = (type) => {
-    let sorted = [...expenses];
+  let sorted = [...expenses];
 
-    if (type === 'high') {
-      sorted.sort((a, b) => b.amount - a.amount);
-    } else if (type === 'low') {
-      sorted.sort((a, b) => a.amount - b.amount);
-    } else if (type === 'latest') {
-      sorted.sort((a, b) => b.id - a.id);
-    } else if (type === 'oldest') {
-      sorted.sort((a, b) => a.id - b.id);
-    }
+  if (type === 'high') {
+    sorted.sort((a, b) => b.amount - a.amount);
+  } else if (type === 'low') {
+    sorted.sort((a, b) => a.amount - b.amount);
+  } else if (type === 'latest') {
+    sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
+  } else if (type === 'oldest') {
+    sorted.sort((a, b) => new Date(a.date) - new Date(b.date));
+  }
 
-    setSortType(type);
-    setExpenses(sorted);
-  };
+  setSortType(type);
+  setExpenses(sorted);
+};
+
 
   return (
     <>
