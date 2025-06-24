@@ -27,3 +27,4 @@ Thumbs.db
 # OS-specific 
 *.swp
 *.swo
+.vercel

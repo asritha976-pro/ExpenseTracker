@@ -35,7 +35,7 @@ exports.login  =async(req,res) => {
     }
     const isPasswordCorrect = await bcrypt.compare(user.password,existingUser.password)
     if(!isPasswordCorrect){
-        return res.status(401).send({error:'Invalid email or passwordd'});
+        return res.status(401).send({error:'Invalid email or password'});
     }
     const payload = {id:existingUser._id,username:existingUser.username ,role : existingUser.role}
     jwt.sign(
