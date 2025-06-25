@@ -18,12 +18,13 @@ Thumbs.db
 .vscode/
 *.code-workspace
 
-# Build outputs (optional) 
-/frontend/dist/
-/frontend/build/
-/backend/dist/
-/backend/build/
+# Build outputs 
+# /frontend/dist/
+# /frontend/build/
+# /backend/dist/
+# /backend/build/
 
 # OS-specific 
 *.swp
 *.swo
+
